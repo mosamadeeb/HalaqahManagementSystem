@@ -1,0 +1,6 @@
+@HalaqahAPI_HostAddress = http://localhost:5285
+
+GET {{HalaqahAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

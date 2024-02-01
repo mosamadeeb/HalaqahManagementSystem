@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalaqahWebApp", "HalaqahWebApp\HalaqahWebApp.csproj", "{E7727AD4-6160-4F2A-AFB0-04627F69CAFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalaqahAPI", "HalaqahAPI\HalaqahAPI.csproj", "{1F7EDDC1-4E5D-47D9-89B9-C5510AA916BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7727AD4-6160-4F2A-AFB0-04627F69CAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7727AD4-6160-4F2A-AFB0-04627F69CAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7727AD4-6160-4F2A-AFB0-04627F69CAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7727AD4-6160-4F2A-AFB0-04627F69CAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F7EDDC1-4E5D-47D9-89B9-C5510AA916BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F7EDDC1-4E5D-47D9-89B9-C5510AA916BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F7EDDC1-4E5D-47D9-89B9-C5510AA916BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F7EDDC1-4E5D-47D9-89B9-C5510AA916BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
