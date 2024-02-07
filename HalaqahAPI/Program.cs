@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HalaqahContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HalaqahContext")));
 
+builder.Services.AddScoped<IRepository<Person>, GenericRepository<Person>>();
 builder.Services.AddScoped<IRepository<Student>, GenericRepository<Student>>();
 builder.Services.AddScoped<IRepository<StudentAttendance>, GenericRepository<StudentAttendance>>();
 builder.Services.AddScoped<StudentService>();
