@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HalaqahAPI.Models;
 
-public partial class Student
+public partial class Student : BaseEntity
 {
     public int PersonId { get; set; }
 
@@ -13,7 +13,7 @@ public partial class Student
 
     public virtual ICollection<HalaqahRecord> HalaqahRecords { get; set; } = new List<HalaqahRecord>();
 
-    public virtual Person Person { get; set; } = null!;
+    public virtual Person? Person { get; set; } = null!;
 
     public virtual ICollection<SemesterRecord> SemesterRecords { get; set; } = new List<SemesterRecord>();
 

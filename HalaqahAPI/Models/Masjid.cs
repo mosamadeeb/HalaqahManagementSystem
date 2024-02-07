@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HalaqahAPI.Models;
 
-public partial class Masjid
+public partial class Masjid : BaseEntity
 {
     public int Id { get; set; }
 

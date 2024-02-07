@@ -1,4 +1,5 @@
 using HalaqahAPI.Context;
+using HalaqahAPI.Helpers;
 using HalaqahAPI.Models;
 using HalaqahAPI.Repository;
 using HalaqahAPI.Services;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<HalaqahContext>(options =>
 builder.Services.AddScoped<IRepository<Student>, GenericRepository<Student>>();
 builder.Services.AddScoped<IRepository<StudentAttendance>, GenericRepository<StudentAttendance>>();
 builder.Services.AddScoped<StudentService>();
+
+builder.Services.AddScoped<EntityHelper>();
 
 builder.Services.AddControllers();
 

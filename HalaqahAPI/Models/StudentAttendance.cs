@@ -12,7 +12,7 @@ public enum AttendanceStatus
     LateNotExcused = 4
 }
 
-public partial class StudentAttendance
+public partial class StudentAttendance : BaseEntity
 {
     public int StudentId { get; set; }
 

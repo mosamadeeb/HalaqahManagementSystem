@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HalaqahAPI.Models;
 
-public partial class UserAttendance
+public partial class UserAttendance : BaseEntity
 {
     public int UserId { get; set; }
 

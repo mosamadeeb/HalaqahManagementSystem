@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HalaqahAPI.Models;
 
-public partial class Semester
+public partial class Semester : BaseEntity
 {
     public int Id { get; set; }
 

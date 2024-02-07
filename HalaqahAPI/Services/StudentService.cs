@@ -3,7 +3,33 @@ using HalaqahAPI.Repository;
 
 namespace HalaqahAPI.Services;
 
-    public void MarkAttendance(int studentId, DateTime date, AttendanceStatus status, bool hasCompleted, bool hasDress)
+public class StudentService(
+    IRepository<Person> persons,
+    IRepository<Student> students,
+    IRepository<StudentAttendance> attendances)
+{
+    public Student? GetStudent(int studentId)
+    {
+        return students.GetByIdThenInclude(studentId, nameof(Student.Person));
+    }
+    
+    public IQueryable<Student> GetAllStudents()
+    {
+        return students.GetAll();
+    }
+    
+    public void CreateStudent(Person person, Student student)
+    {
+        persons.Insert(person);
+        persons.Save();
+        
+        // Set person ID after inserting the person to ensure the ID is generated.
+        student.PersonId = person.Id;
+        
+        students.Insert(student);
+        students.Save();
+    }
+    
     public void MarkAttendance(int studentId, StudentAttendance attendanceRecord)
     {
         var student = students.GetById(studentId);
