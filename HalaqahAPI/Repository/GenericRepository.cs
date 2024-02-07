@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using HalaqahAPI.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +14,43 @@ public class GenericRepository<T>(HalaqahContext context) : IRepository<T>
         return _dbSet.AsNoTracking();
     }
 
-    public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+    public IQueryable<T> GetAllThenInclude(params string[] navigationsToInclude)
     {
-        return _dbSet.AsNoTracking().Where(predicate);
+        return navigationsToInclude.Length == 0 ? GetAll() : GetAll().Include(string.Join('.', navigationsToInclude));
     }
 
     public T? GetById(object id)
     {
-        return _dbSet.Find(id);
+        var obj = _dbSet.Find(id);
+        if (obj == null)
+        {
+            return null;
+        }
+
+        // Detach the object from the context to make it read-only.
+        context.Entry(obj).State = EntityState.Detached;
+        return obj;
+    }
+
+    public T? GetByIdThenInclude(object id,  params string[] navigationsToInclude)
+    {
+        var obj = _dbSet.Find(id);
+        if (obj == null)
+        {
+            return null;
+        }
+
+        var entry = context.Entry(obj);
+        
+        var toLoad = entry.Navigations.Where(n => navigationsToInclude.Contains(n.Metadata.Name)).ToList();
+        foreach (var navigationEntry in toLoad)
+        {
+            navigationEntry.Load();
+        }
+        
+        // Detach the object from the context to make it read-only.
+        entry.State = EntityState.Detached;
+        return obj;
     }
 
     public void Insert(T obj)
