@@ -24,5 +24,5 @@ public partial class StudentAttendance
 
     public bool HasDress { get; set; }
 
-    public virtual Student Student { get; set; } = null!;
+    public virtual Student? Student { get; set; } = null!;
 }

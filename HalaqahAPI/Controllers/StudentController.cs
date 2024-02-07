@@ -10,11 +10,11 @@ namespace HalaqahAPI.Controllers
     {
         // POST: api/Student/{id}/markAttendance
         [HttpPost("{id}/markAttendance")]
-        public async Task<IActionResult> MarkAttendance(int id, DateTime date, AttendanceStatus status, bool hasCompleted, bool hasDress)
+        public async Task<IActionResult> MarkAttendance(int id, StudentAttendance attendanceRecord)
         {
             try
             {
-                service.MarkAttendance(id, date, status, hasCompleted, hasDress);
+                service.MarkAttendance(id, attendanceRecord);
             }
             catch (KeyNotFoundException e)
             {

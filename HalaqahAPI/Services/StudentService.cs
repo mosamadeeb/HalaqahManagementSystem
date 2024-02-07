@@ -3,9 +3,8 @@ using HalaqahAPI.Repository;
 
 namespace HalaqahAPI.Services;
 
-public class StudentService(IRepository<Student> students, IRepository<StudentAttendance> attendance)
-{
     public void MarkAttendance(int studentId, DateTime date, AttendanceStatus status, bool hasCompleted, bool hasDress)
+    public void MarkAttendance(int studentId, StudentAttendance attendanceRecord)
     {
         var student = students.GetById(studentId);
         if (student == null)
@@ -13,21 +12,12 @@ public class StudentService(IRepository<Student> students, IRepository<StudentAt
             throw new KeyNotFoundException("Student not found");
         }
 
-        if (attendance.GetAll(a => a.StudentId == studentId && a.Timestamp.Date == date.Date).Any())
+        if (attendances.GetAll().Any(a => a.StudentId == studentId && a.Timestamp.Date == attendanceRecord.Timestamp.Date))
         {
             throw new Exception("Attendance already marked");
         }
 
-        var attendanceRecord = new StudentAttendance
-        {
-            StudentId = studentId,
-            Timestamp = date,
-            Status = status,
-            HasCompleted = hasCompleted,
-            HasDress = hasDress
-        };
-
-        attendance.Insert(attendanceRecord);
-        attendance.Save();
+        attendances.Insert(attendanceRecord);
+        attendances.Save();
     }
 }
