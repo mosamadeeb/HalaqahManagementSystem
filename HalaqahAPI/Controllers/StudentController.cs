@@ -2,6 +2,7 @@ using HalaqahModel.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using HalaqahModel.Models;
 using HalaqahAPI.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace HalaqahAPI.Controllers
 {
@@ -9,7 +10,18 @@ namespace HalaqahAPI.Controllers
     [ApiController]
     public class StudentController(StudentService service, EntityHelper entityHelper) : ControllerBase
     {
+        // GET: api/Student
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
+        {
+            return Ok(service.GetAllStudents()
+                .Include(s => s.Person)
+                .Select(st => entityHelper.OnlyInclude(st, nameof(Student.Person)))
+                .AsEnumerable());
+        }
+        
+        // GET: api/Student/{id}
+        [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
             var student = service.GetStudent(id);

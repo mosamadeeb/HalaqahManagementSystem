@@ -1,18 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using HalaqahModel.Models;
+using Newtonsoft.Json;
 
 namespace HalaqahWebApp.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel(ILogger<IndexModel> logger, IHttpClientFactory httpClientFactory) : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    public List<Student> Students = [];
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public async Task<IActionResult> OnGetAsync()
     {
-        _logger = logger;
-    }
+        var httpClient = httpClientFactory.CreateClient();
+        using (var response = await httpClient.GetAsync("http://localhost:5285/api/Student"))
+        {
+            if (!response.IsSuccessStatusCode) return Page();
+            
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            Students = JsonConvert.DeserializeObject<List<Student>>(apiResponse) ?? [];
+        }
 
-    public void OnGet()
-    {
+        return Page();
     }
 }
