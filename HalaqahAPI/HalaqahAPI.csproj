@@ -24,4 +24,8 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HalaqahModel\HalaqahModel.csproj" />
+    </ItemGroup>
+
 </Project>

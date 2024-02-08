@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using HalaqahAPI.Models;
+using HalaqahModel.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HalaqahAPI.Context;
+namespace HalaqahModel.Context;
 
 public partial class HalaqahContext : DbContext
 {

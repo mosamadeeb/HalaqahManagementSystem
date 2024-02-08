@@ -1,6 +1,6 @@
-using HalaqahAPI.Helpers;
+using HalaqahModel.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using HalaqahAPI.Models;
+using HalaqahModel.Models;
 using HalaqahAPI.Services;
 
 namespace HalaqahAPI.Controllers

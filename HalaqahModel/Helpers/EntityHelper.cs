@@ -1,7 +1,7 @@
-using HalaqahAPI.Context;
-using HalaqahAPI.Models;
+using HalaqahModel.Context;
+using HalaqahModel.Models;
 
-namespace HalaqahAPI.Helpers;
+namespace HalaqahModel.Helpers;
 
 public class EntityHelper(HalaqahContext context)
 {

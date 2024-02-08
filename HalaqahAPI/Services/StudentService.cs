@@ -1,5 +1,5 @@
-using HalaqahAPI.Models;
-using HalaqahAPI.Repository;
+using HalaqahModel.Models;
+using HalaqahModel.Repository;
 
 namespace HalaqahAPI.Services;
 

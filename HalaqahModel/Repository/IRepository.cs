@@ -1,4 +1,4 @@
-namespace HalaqahAPI.Repository;
+namespace HalaqahModel.Repository;
 
 public interface IRepository<T> where T : class
 {

@@ -1,7 +1,7 @@
-using HalaqahAPI.Context;
-using HalaqahAPI.Helpers;
-using HalaqahAPI.Models;
-using HalaqahAPI.Repository;
+using HalaqahModel.Context;
+using HalaqahModel.Helpers;
+using HalaqahModel.Models;
+using HalaqahModel.Repository;
 using HalaqahAPI.Services;
 using Microsoft.EntityFrameworkCore;
 

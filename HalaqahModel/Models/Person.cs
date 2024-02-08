@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HalaqahAPI.Models;
+namespace HalaqahModel.Models;
 
 public partial class Person : BaseEntity
 {

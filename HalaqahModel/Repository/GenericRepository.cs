@@ -1,7 +1,7 @@
-using HalaqahAPI.Context;
+using HalaqahModel.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace HalaqahAPI.Repository;
+namespace HalaqahModel.Repository;
 
 public class GenericRepository<T>(HalaqahContext context) : IRepository<T>
     where T : class
