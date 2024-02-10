@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HalaqahAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/student")]
     [ApiController]
     public class StudentController(StudentService service, EntityHelper entityHelper) : ControllerBase
     {
-        // GET: api/Student
+        // GET: api/student
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
         {
@@ -20,7 +20,7 @@ namespace HalaqahAPI.Controllers
                 .AsEnumerable());
         }
         
-        // GET: api/Student/{id}
+        // GET: api/student/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
@@ -33,13 +33,16 @@ namespace HalaqahAPI.Controllers
             return entityHelper.AlsoInclude(student, nameof(Student.Person));
         }
 
-        // POST: api/Student/{id}/markAttendance
-        [HttpPost("{id}/markAttendance")]
-        public async Task<IActionResult> MarkAttendance(int id, StudentAttendance attendanceRecord)
+        // POST: api/student/attendance
+        [HttpPost("attendance")]
+        public async Task<IActionResult> MarkAttendance(IEnumerable<StudentAttendance> attendanceRecords)
         {
             try
             {
-                service.MarkAttendance(id, attendanceRecord);
+                foreach (var record in attendanceRecords)
+                {
+                    service.MarkAttendance(record);
+                }
             }
             catch (KeyNotFoundException e)
             {
@@ -50,7 +53,7 @@ namespace HalaqahAPI.Controllers
                 return BadRequest(e.Message);
             }
             
-            return NoContent();
+            return Ok();
         }
     }
 }

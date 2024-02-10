@@ -17,7 +17,7 @@ public partial class Person : BaseEntity
 
     public int MasjidId { get; set; }
 
-    public virtual Masjid Masjid { get; set; } = null!;
+    public virtual Masjid? Masjid { get; set; } = null!;
 
     public virtual Student? Student { get; set; }
 

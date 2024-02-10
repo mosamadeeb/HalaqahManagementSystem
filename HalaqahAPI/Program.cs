@@ -29,6 +29,7 @@ builder.Services.AddScoped<IRepository<StudentAttendance>, GenericRepository<Stu
 builder.Services.AddScoped<IRepository<User>, GenericRepository<User>>();
 builder.Services.AddScoped<IRepository<UserAttendance>, GenericRepository<UserAttendance>>();
 
+builder.Services.AddScoped<HalaqahService>();
 builder.Services.AddScoped<StudentService>();
 
 builder.Services.AddScoped<EntityHelper>();
