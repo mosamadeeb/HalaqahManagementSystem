@@ -1,0 +1,75 @@
+@page "/halaqah/{halaqahId}/attendance"
+@using HalaqahModel.Models
+@using System.Collections.ObjectModel
+@inject HttpClient Http
+@inject ISnackbar Snackbar
+
+<PageTitle>Attendance</PageTitle>
+
+<MudButton OnClick="@SaveAttendance">Save attendance</MudButton>
+<MudDataGrid Items="@Attendances">
+    <Columns>
+        <PropertyColumn Title="Student" Property="x => x.Student.FullName" />
+        <TemplateColumn Title="Attendance Status" CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudSelect T="AttendanceStatus" @bind-Value="@context.Item.Status">
+                    <MudSelectItem Value="AttendanceStatus.Present" Style="background-color: #3dfc4d; color: black">Present</MudSelectItem>
+                    <MudSelectItem Value="AttendanceStatus.AbsentExcused" Style="background-color:#e8424f; color: black;">Absent (Excused)</MudSelectItem>
+                    <MudSelectItem Value="AttendanceStatus.AbsentNotExcused" Style="background-color:#e8424f; color: black;">Absent (Not excused)</MudSelectItem>
+                    <MudSelectItem Value="AttendanceStatus.LateExcused" Style="background-color:#e8424f; color: black;">Late (Excused)</MudSelectItem>
+                    <MudSelectItem Value="AttendanceStatus.LateNotExcused" Style="background-color:#e8424f; color: black;">Late (Not excused)</MudSelectItem>
+                </MudSelect>
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn Title="Has completed">
+            <CellTemplate>
+                <MudCheckBox @bind-Value="@context.Item.HasCompleted" Color="Color.Primary"></MudCheckBox>
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn Title="Has dress">
+            <CellTemplate>
+                <MudCheckBox @bind-Value="@context.Item.HasDress" Color="Color.Primary"></MudCheckBox>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
+@code {
+    [Parameter]
+    public string halaqahId { get; set; } = null;
+    
+    public int HalaqahId => int.Parse(halaqahId);
+    
+    private ObservableCollection<StudentAttendance> Attendances { get; set; } = [];
+    private List<Student> Students { get; set; } = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        Students = (await Http.GetFromJsonAsync<IEnumerable<Student>>($"api/halaqah/{HalaqahId}/students"))?.ToList() ?? [];
+        Attendances = new ObservableCollection<StudentAttendance>(Students.Select(s =>
+            new StudentAttendance
+            {
+                StudentId = s.PersonId,
+                Student = s,
+                Status = AttendanceStatus.AbsentNotExcused,
+                HasCompleted = false,
+                HasDress = false,
+                Timestamp = DateTime.Today,
+            }));
+    }
+    
+    async Task SaveAttendance()
+    {
+        var result = await Http.PostAsJsonAsync($"api/student/attendance", Attendances.AsEnumerable());
+
+        if (result.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Attendance was saved", Severity.Normal);
+        }
+        else
+        {
+            Snackbar.Add("Failed to save attendance", Severity.Error);
+        }
+        
+    }
+}

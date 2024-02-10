@@ -1,0 +1,45 @@
+@page "/login"
+@using System.ComponentModel.DataAnnotations
+
+<PageTitle>Login</PageTitle>
+
+<MudText size="24">Hello world!</MudText>
+<EditForm FormName="Login" Model="@Form" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudCard Class="demo-form">
+        <MudCardContent>
+            <MudTextField Label="Email"
+                          @bind-Value="Form.Email" For="@(() => Form.Email)"/>
+            <MudTextField Label="Password"
+                          @bind-Value="Form.Password" For="@(() => Form.Password)" InputType="InputType.Password"/>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">
+                Login
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private LoginForm Form { get; set; } = new();
+
+    public class LoginForm
+    {
+        [Required] [EmailAddress] public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(30, MinimumLength = 8)]
+        // [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")]
+        public string Password { get; set; }
+    }
+    
+    private void OnValidSubmit(EditContext context)
+    {
+        Console.WriteLine("OnValidSubmit");
+        StateHasChanged();
+    }
+
+}

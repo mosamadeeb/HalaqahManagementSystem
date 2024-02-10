@@ -11,8 +11,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Mudblazor
-// builder.Services.AddMudServices();
 builder.Services.AddMudServices();
+
+builder.Services.AddHttpClient("API", client => client.BaseAddress = new Uri("http://localhost:5285/"));
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("API"));
 
 // Blazorise Bootstrap 5
 // builder.Services
