@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 
 // Mudblazor
 // builder.Services.AddMudServices();
+builder.Services.AddMudServices();
 
 // Blazorise Bootstrap 5
 // builder.Services
