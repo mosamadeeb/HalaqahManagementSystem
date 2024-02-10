@@ -3,47 +3,46 @@ using HalaqahModel.Repository;
 
 namespace HalaqahAPI.Services;
 
-public class StudentService(
-    IRepository<Person> persons,
-    IRepository<Student> students,
-    IRepository<StudentAttendance> attendances)
+public class StudentService(UnitOfWork db)
 {
     public Student? GetStudent(int studentId)
     {
-        return students.GetByIdThenInclude(studentId, nameof(Student.Person));
+        return db.Students.GetByIdThenInclude(studentId, nameof(Student.Person));
     }
     
     public IQueryable<Student> GetAllStudents()
     {
-        return students.GetAll();
+        return db.Students.GetAll();
     }
     
     public void CreateStudent(Person person, Student student)
     {
-        persons.Insert(person);
-        persons.Save();
+        db.Persons.Insert(person);
+        db.Save();
         
         // Set person ID after inserting the person to ensure the ID is generated.
         student.PersonId = person.Id;
         
-        students.Insert(student);
-        students.Save();
+        db.Students.Insert(student);
+        db.Save();
     }
     
-    public void MarkAttendance(int studentId, StudentAttendance attendanceRecord)
+    public void MarkAttendance(StudentAttendance attendanceRecord)
     {
-        var student = students.GetById(studentId);
+        var student = db.Students.GetById(attendanceRecord.StudentId);
         if (student == null)
         {
             throw new KeyNotFoundException("Student not found");
         }
 
-        if (attendances.GetAll().Any(a => a.StudentId == studentId && a.Timestamp.Date == attendanceRecord.Timestamp.Date))
+        if (db.StudentAttendances.GetAll().Any(a => a.StudentId == attendanceRecord.StudentId && a.Timestamp.Date == attendanceRecord.Timestamp.Date))
         {
             throw new Exception("Attendance already marked");
         }
+        
+        attendanceRecord.Student = null;
 
-        attendances.Insert(attendanceRecord);
-        attendances.Save();
+        db.StudentAttendances.Insert(attendanceRecord);
+        db.Save();
     }
 }

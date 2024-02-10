@@ -82,9 +82,4 @@ public class GenericRepository<T>(HalaqahContext context) : IRepository<T>
         
         _dbSet.Remove(obj);
     }
-
-    public void Save()
-    {
-        context.SaveChanges();
-    }
 }
