@@ -41,6 +41,7 @@ namespace HalaqahAPI.Controllers
             {
                 foreach (var record in attendanceRecords)
                 {
+                    record.Timestamp = DateTime.Today;
                     service.MarkAttendance(record);
                 }
             }
