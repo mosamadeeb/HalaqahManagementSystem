@@ -18,4 +18,46 @@
       <ProjectReference Include="..\HalaqahModel\HalaqahModel.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Pages\Admin\Attendance.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Attendance.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Admin\Attendance.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Attendance.ar-SA.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Shared\Login.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Login.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Localization\Pages\Admin\Attendance.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Attendance.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Pages\Admin\Attendance.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Attendance.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Admin\Attendance.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Attendance.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Shared\Login.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Login.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Localization\Pages\Admin\Attendance.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Attendance.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

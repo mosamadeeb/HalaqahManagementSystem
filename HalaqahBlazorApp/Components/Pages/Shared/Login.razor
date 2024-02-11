@@ -1,21 +1,22 @@
 @page "/login"
 @using System.ComponentModel.DataAnnotations
+@using Loc = Localization.Pages.Shared.Login
 
-<PageTitle>Login</PageTitle>
+<PageTitle>@Loc.LoginTitle</PageTitle>
 
 <MudText size="24">Hello world!</MudText>
 <EditForm FormName="Login" Model="@Form" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator/>
     <MudCard Class="demo-form">
         <MudCardContent>
-            <MudTextField Label="Email"
+            <MudTextField Label="@Loc.Email"
                           @bind-Value="Form.Email" For="@(() => Form.Email)"/>
-            <MudTextField Label="Password"
+            <MudTextField Label="@Loc.Password"
                           @bind-Value="Form.Password" For="@(() => Form.Password)" InputType="InputType.Password"/>
         </MudCardContent>
         <MudCardActions>
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">
-                Login
+                @Loc.LoginTitle
             </MudButton>
         </MudCardActions>
     </MudCard>

@@ -1,12 +1,33 @@
+using System.Globalization;
 using HalaqahBlazorApp.Components;
 using MudBlazor.Services;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLocalization();
+builder.Services.Configure<RequestLocalizationOptions>(
+    options =>
+    {
+        List<CultureInfo> supportedCultures =
+        [
+            new CultureInfo("ar-SA"),
+            new CultureInfo("en-US"),
+        ];
+
+        options.DefaultRequestCulture = new RequestCulture("ar-SA");
+
+        // Formatting numbers, dates, etc.
+        options.SupportedCultures = supportedCultures;
+
+        // UI string 
+        options.SupportedUICultures = supportedCultures;
+    });
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -39,6 +60,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.UseRequestLocalization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

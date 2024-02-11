@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="SaveAttendance" xml:space="preserve">
+        <value>سجل الحضور</value>
+    </data>
+    <data name="Student" xml:space="preserve">
+        <value>الطالب</value>
+    </data>
+    <data name="AttendanceStatus" xml:space="preserve">
+        <value>الحضور</value>
+    </data>
+    <data name="HasCompleted" xml:space="preserve">
+        <value>انجاز</value>
+    </data>
+    <data name="HasDress" xml:space="preserve">
+        <value>شماغ</value>
+    </data>
+    <data name="Present" xml:space="preserve">
+        <value>حاضر</value>
+    </data>
+    <data name="AbsentExcused" xml:space="preserve">
+        <value>غائب بعذر</value>
+    </data>
+    <data name="AbsentNotExcused" xml:space="preserve">
+        <value>غائب</value>
+    </data>
+    <data name="LateExcused" xml:space="preserve">
+        <value>متاخر بعذر</value>
+    </data>
+    <data name="LateNotExcused" xml:space="preserve">
+        <value>متاخر</value>
+    </data>
+    <data name="AttendanceSaveSuccess" xml:space="preserve">
+        <value>تم تسجيل الحضور</value>
+    </data>
+    <data name="AttendanceSaveFail" xml:space="preserve">
+        <value>لم يتم تسجيل الحضور</value>
+    </data>
+    <data name="AttendanceTitle" xml:space="preserve">
+        <value>الحضور</value>
+    </data>
+</root>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Localization
+@using System.Globalization
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,7 +26,17 @@
     
     @* Razden *@
     @* <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css"> *@
-    
+
+    @{
+        // Store the current culture in a cookie
+        this.HttpContext.Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(
+                new RequestCulture(
+                    CultureInfo.CurrentCulture,
+                    CultureInfo.CurrentUICulture)));
+    }
+
     @if(RenderModeForPage is not null)
     {
         <HeadOutlet @rendermode="@RenderModeForPage" />    

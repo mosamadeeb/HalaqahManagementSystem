@@ -1,4 +1,8 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+@inject NavigationManager NavigationManager
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">HalaqahBlazorApp</a>
     </div>
@@ -31,5 +35,22 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
             </NavLink>
         </div>
+
+        <div class="nav-item px-3">
+            <MudSelect T="CultureInfo" Value="@CultureInfo.CurrentCulture" ValueChanged="x => OnCultureChanged(x)">
+                <MudSelectItem Value="@(new CultureInfo("ar-SA"))">Arabic</MudSelectItem>
+                <MudSelectItem Value="@(new CultureInfo("en-US"))">English</MudSelectItem>
+            </MudSelect>
+        </div>
     </nav>
 </div>
+
+@code {
+    private void OnCultureChanged(CultureInfo culture)
+    {
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
+        
+        NavigationManager.NavigateTo(NavigationManager.GetUriWithQueryParameter("culture", culture.Name), forceLoad: true);
+    }
+}
