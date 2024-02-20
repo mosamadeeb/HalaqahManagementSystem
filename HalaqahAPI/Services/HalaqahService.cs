@@ -9,4 +9,9 @@ public class HalaqahService(UnitOfWork db)
     {
         return db.Halaqahs.GetByIdThenInclude(halaqahId, nameof(Halaqah.Students))?.Students ?? [];
     }
+    
+    public IEnumerable<Halaqah> GetHalaqahsForAdmin(int adminId)
+    {
+        return db.Halaqahs.GetAll().Where(x => x.AdminId == adminId);
+    }
 }

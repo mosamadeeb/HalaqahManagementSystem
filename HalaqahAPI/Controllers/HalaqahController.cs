@@ -17,5 +17,12 @@ namespace HalaqahAPI.Controllers
                 .Select(st => entityHelper.OnlyInclude(st, nameof(Student.Person)))
                 .AsEnumerable());
         }
+        
+        // GET: api/halaqah
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Halaqah>>> GetHalaqahs(int adminId)
+        {
+            return Ok(service.GetHalaqahsForAdmin(adminId));
+        }
     }
 }
