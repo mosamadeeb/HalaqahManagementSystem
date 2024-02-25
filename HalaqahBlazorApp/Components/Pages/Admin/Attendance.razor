@@ -50,7 +50,7 @@
         Attendances = new ObservableCollection<StudentAttendance>(Students.Select(s =>
             new StudentAttendance
             {
-                StudentId = s.PersonId,
+                StudentId = s.Id,
                 Student = s,
                 Status = AttendanceStatus.AbsentNotExcused,
                 HasCompleted = false,

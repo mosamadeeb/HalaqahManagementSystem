@@ -14,7 +14,7 @@ namespace HalaqahAPI.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetStudentsInHalaqah(int id)
         {
             return Ok(service.GetStudentsInHalaqah(id)
-                .Select(st => entityHelper.OnlyInclude(st, nameof(Student.Person)))
+                .Select(st => entityHelper.OnlyInclude(st))
                 .AsEnumerable());
         }
         

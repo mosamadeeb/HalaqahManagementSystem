@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<HalaqahContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("HalaqahContext")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("HalaqahContext")));
 
 builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<IRepository<Halaqah>, GenericRepository<Halaqah>>();

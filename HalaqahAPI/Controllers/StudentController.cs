@@ -15,8 +15,7 @@ namespace HalaqahAPI.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
         {
             return Ok(service.GetAllStudents()
-                .Include(s => s.Person)
-                .Select(st => entityHelper.OnlyInclude(st, nameof(Student.Person)))
+                .Select(st => entityHelper.OnlyInclude(st))
                 .AsEnumerable());
         }
         
@@ -30,7 +29,7 @@ namespace HalaqahAPI.Controllers
                 return NotFound();
             }
 
-            return entityHelper.AlsoInclude(student, nameof(Student.Person));
+            return student;
         }
 
         // POST: api/student/attendance

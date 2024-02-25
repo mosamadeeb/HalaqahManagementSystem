@@ -7,7 +7,7 @@ public class StudentService(UnitOfWork db)
 {
     public Student? GetStudent(int studentId)
     {
-        return db.Students.GetByIdThenInclude(studentId, nameof(Student.Person));
+        return db.Students.GetById(studentId);
     }
     
     public IQueryable<Student> GetAllStudents()
@@ -15,14 +15,8 @@ public class StudentService(UnitOfWork db)
         return db.Students.GetAll();
     }
     
-    public void CreateStudent(Person person, Student student)
+    public void CreateStudent(Student student)
     {
-        db.Persons.Insert(person);
-        db.Save();
-        
-        // Set person ID after inserting the person to ensure the ID is generated.
-        student.PersonId = person.Id;
-        
         db.Students.Insert(student);
         db.Save();
     }

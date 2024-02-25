@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace HalaqahModel.Models;
 
@@ -19,7 +20,5 @@ public partial class Person : BaseEntity
 
     public virtual Masjid? Masjid { get; set; } = null!;
 
-    public virtual Student? Student { get; set; }
-
-    public virtual User? User { get; set; }
+    public string FullName => $"{Name} {Surname}";
 }

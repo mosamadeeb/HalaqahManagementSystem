@@ -43,11 +43,12 @@ public partial class HalaqahContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=HMSv2;Trusted_Connection=True;Encrypt=False");
+        //=> optionsBuilder.UseSqlServer("Server=localhost,5432;Database=HMS;User Id=postgres;Password=12345678;");
+        => optionsBuilder.UseNpgsql("Host=localhost,5432; Database=HMS; Username=postgres;Password=12345678");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+        //modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
         modelBuilder.Entity<Halaqah>(entity =>
         {
@@ -100,7 +101,7 @@ public partial class HalaqahContext : DbContext
 
             entity.ToTable("HalaqahRecord");
 
-            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.Date).HasColumnType("timestamp");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.HifzRecordId).HasColumnName("HifzRecordID");
             entity.Property(e => e.RevisionRecordId).HasColumnName("RevisionRecordID");
@@ -176,8 +177,8 @@ public partial class HalaqahContext : DbContext
             entity.ToTable("Semester");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.EndDate).HasColumnType("datetime");
-            entity.Property(e => e.StartDate).HasColumnType("datetime");
+            entity.Property(e => e.EndDate).HasColumnType("timestamp");
+            entity.Property(e => e.StartDate).HasColumnType("timestamp");
         });
 
         modelBuilder.Entity<SemesterRecord>(entity =>
@@ -220,21 +221,11 @@ public partial class HalaqahContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.PersonId);
-
             entity.ToTable("Student");
-
-            entity.Property(e => e.PersonId)
-                .ValueGeneratedNever()
-                .HasColumnName("PersonID");
+            
             entity.Property(e => e.ParentPhone)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-
-            entity.HasOne(d => d.Person).WithOne(p => p.Student)
-                .HasForeignKey<Student>(d => d.PersonId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_Person");
         });
 
         modelBuilder.Entity<StudentAttendance>(entity =>
@@ -244,7 +235,7 @@ public partial class HalaqahContext : DbContext
             entity.ToTable("StudentAttendance");
 
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
-            entity.Property(e => e.Timestamp).HasColumnType("datetime");
+            entity.Property(e => e.Timestamp).HasColumnType("timestamp");
 
             entity.HasOne(d => d.Student).WithMany(p => p.StudentAttendances)
                 .HasForeignKey(d => d.StudentId)
@@ -254,21 +245,11 @@ public partial class HalaqahContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.PersonId);
-
             entity.ToTable("User");
-
-            entity.Property(e => e.PersonId)
-                .ValueGeneratedNever()
-                .HasColumnName("PersonID");
+            
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.Nationality).HasMaxLength(50);
             entity.Property(e => e.PasswordHash).HasMaxLength(50);
-
-            entity.HasOne(d => d.Person).WithOne(p => p.User)
-                .HasForeignKey<User>(d => d.PersonId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_User_Person");
         });
 
         modelBuilder.Entity<UserAttendance>(entity =>
@@ -278,7 +259,7 @@ public partial class HalaqahContext : DbContext
             entity.ToTable("UserAttendance");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.Timestamp).HasColumnType("datetime");
+            entity.Property(e => e.Timestamp).HasColumnType("timestamp");
 
             entity.HasOne(d => d.User).WithMany(p => p.UserAttendances)
                 .HasForeignKey(d => d.UserId)
